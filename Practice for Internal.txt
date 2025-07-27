@@ -1,0 +1,704 @@
+1.Linear Search (Non-recursion)
+---------------------------------
+
+#include<stdio.h>
+int linearsearch(int *ar,int size,int sea);
+int main()
+{
+	int n,a[100],res,i,key;
+	scanf("%d",&n);
+	for ( i = 0; i < n; i++ )
+	{
+		scanf("%d",&a[i]);
+	}
+	scanf("%d",&key);
+	res = linearsearch(a,n,key);
+	if (res != -1)
+	printf("Element found at %d index",res);
+	else
+	printf("Element not found");
+}
+int linearsearch(int *ar,int size,int searc)
+{
+	int j;
+	for ( j = 0; j < size; j++ )
+	{
+		if ( ar[j] == searc)
+		return j;
+	}
+	return -1;
+}
+
+2.Linear Search (Recursion)
+-----------------------------
+
+#include<stdio.h>
+int linearsearch(int *ar,int size,int i,int sea);
+int main()
+{
+	int n,a[100],res,i,key;
+	scanf("%d",&n);
+	for ( i = 0; i < n; i++ )
+	{
+		scanf("%d",&a[i]);
+	}
+	scanf("%d",&key);
+	res = linearsearch(a,n,0,key);
+	if (res != -1)
+	printf("Element found at %d index",res);
+	else
+	printf("Element not found");
+}
+int linearsearch(int *ar,int size,int i,int searc)
+{
+	if (i == searc)
+	return -1;
+	if ( ar[i] == searc)
+	return i;
+	linearsearch(ar,size,i+1,searc);
+}
+
+3.Binary Search (Non-recursion)
+---------------------------------
+
+#include<stdio.h>
+int binarysearch(int *ar,int size,int sea);
+int main()
+{
+	int n,a[100],res,i,key;
+	scanf("%d",&n);
+	for ( i = 0; i < n; i++ )
+	{
+		scanf("%d",&a[i]);
+	}
+	scanf("%d",&key);
+	res = binarysearch(a,n,key);
+	if (res != -1)
+	printf("Element found at %d index",res);
+	else
+	printf("Element not found");
+}
+int binarysearch(int *ar,int size,int searc)
+{
+	int l,h,mid;
+	l = 0;
+	h = size-1;
+	while(l <= h)
+	{
+		mid = (l+h)/2;
+		if (ar[mid] == searc) 
+		return mid;
+		else if (ar[mid] < searc) 
+		l = mid+1;
+		else 
+		h = mid-1;
+	}
+	return -1;
+}
+
+4.Binary Search (Recursion)
+-----------------------------
+
+#include<stdio.h>
+int binarysearch(int *ar,int l,int h,int sea);
+int main()
+{
+	int n,a[100],res,i,key;
+	scanf("%d",&n);
+	for ( i = 0; i < n; i++ )
+	{
+		scanf("%d",&a[i]);
+	}
+	scanf("%d",&key);
+	res = binarysearch(a,0,n-1,key);
+	if (res != -1)
+	printf("Element found at %d index",res);
+	else
+	printf("Element not found");
+}
+int binarysearch(int *ar,int l,int h,int searc)
+{
+	int mid;
+	if (l > h)
+	{
+		return -1;
+	}
+	mid = (l+h)/2;
+	if (ar[mid] == searc) 
+	{
+		return mid;
+	}
+	else if (ar[mid] < searc) 
+	{
+	    l = mid+1;
+	}
+	else 
+	{
+		h = mid-1;
+	}
+	return binarysearch(ar,l,h,searc);
+}
+
+5.Bubble Sort 
+---------------
+
+#include<stdio.h>
+void bubblesort(int *arr,int size);
+int main()
+{
+	int n,a[100],i;
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+	{
+		scanf("%d",&a[i]);
+	}
+	bubblesort(a,n);
+	printf("The sorted array is : \n");
+	for(i=0;i<n;i++)
+	{
+		printf("%d ",a[i]);
+	}
+}
+void bubblesort(int *arr,int size)
+{
+	int p,j,temp,sc;
+	sc = 0;
+	for(p=1;p<=size;p++)
+	{
+		for(j=0;j<size-p;j++)
+		{
+			if(arr[j] > arr[j+1])
+			{
+				temp = arr[j];
+				arr[j] = arr[j+1];
+				arr[j+1] = temp;
+				sc++;
+			}
+		}
+	}
+}  
+
+
+
+6.Selection Sort 
+------------------
+
+#include<stdio.h>
+void selectsort(int *arr,int size);
+int main()
+{
+	int n,a[100];
+	scanf("%d",&n);
+	int i;
+	for(i=0;i<n;i++)
+	{
+		scanf("%d",&a[i]);
+	}
+	selectsort(a,n);
+	printf("The sorted array : \n");
+	for(i=0;i<n;i++)
+	{
+		printf("%d ",a[i]);
+	}
+}
+void selectsort(int *arr,int size)
+{
+	int p,j,max,maxind,temp;
+	for(p=0;p<size-1;p++)
+	{
+		max = arr[0];
+		maxind = 0;
+		for(j=0;j<size-p;j++)
+		{
+			if(arr[j]>max)
+			{
+				max = arr[j];
+				maxind = j;
+			}
+		}
+		temp = arr[maxind];
+		arr[maxind] = arr[j-1];
+		arr[j-1] = temp;
+	}
+}
+
+7.Insertion Sort 
+-----------------
+
+#include<stdio.h>
+void insertsort(int *arr,int size);
+int main()
+{
+	int n,i,a[100];
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+	{
+		scanf("%d",&a[i]);
+	}
+	insertsort(a,n);
+	printf("The sorted array : \n");
+	for(i=0;i<n;i++)
+	{
+		printf("%d ",a[i]);
+	}
+}
+void insertsort(int *arr,int size)
+{
+	int i,j,temp;
+	for(i=0;i<size;i++)
+	{
+		j = i - 1;
+		while(j >= 0 && arr[j]>arr[j+1])
+		{
+			temp = arr[j+1];
+			arr[j+1] = arr[j];
+			arr[j] = temp;
+			j = j-1;
+		}
+	}
+}
+
+
+8.Merge Sort
+-------------
+
+#include<stdio.h>
+void mergesort(int *a,int m,int *b,int n);
+int main()
+{
+	int i,j,m,n,a[20],b[20];
+	scanf("%d%d",&m,&n);
+	for(i=0;i<m;i++)
+	{
+		scanf("%d",&a[i]);
+	}
+	for(j=0;j<n;j++)
+	{
+		scanf("%d",&b[j]);
+	}
+	mergesort(a,m,b,n);
+}
+void mergesort(int *a,int m,int *b,int n)
+{
+	int res[100] = {0};
+	int i = 0, j = 0, k = 0;
+	while(i<m&&j<n)
+	{
+		if(a[i]<b[j])
+		{
+			res[k] = a[i];
+			i++;
+			k++;
+		}
+		else
+		{
+			res[k] = b[j];
+			j++;
+			k++;
+		}
+	}
+	while(i<m)
+	{
+		res[k] = a[i];
+		i++;
+		k++;
+	}
+	while(j<n)
+	{
+		res[k] = b[j];
+		j++;
+		k++;
+	}
+	for(i=0;i<m+n;i++)
+	{
+		printf("%d ",res[i]);
+	}
+}
+
+
+9.Quick Sort
+-------------
+
+#include<stdio.h>
+void quicksort(int *arr,int Low,int High);
+void swap(int *arr,int m, int n);
+int partition(int *arr,int Low,int High);
+int main()
+{
+	int n,a[100],i;
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+	{
+		scanf("%d",&a[i]);
+	}
+	quicksort(a,0,n-1);
+	for(i=0;i<n;i++)
+	{
+		printf("%d  ",a[i]);
+	}
+}
+void quicksort(int *arr,int Low,int High)
+{
+	int par;
+	if(Low<High)
+	{
+		par = partition(arr,Low,High);
+		quicksort(arr,Low,par-1);
+		quicksort(arr,par+1,High);
+	}
+}
+void swap(int *arr,int m, int n)
+{
+	int temp;
+	temp = arr[m];
+	arr[m] = arr[n];
+	arr[n] = temp;
+}
+int partition(int *arr,int Low,int High)
+{
+	int p = High,i = Low,j = Low;
+	while(i<p)
+	{
+		if (arr[i]<arr[p])
+		{
+			swap(arr,i,j);
+			j++;
+		}
+		i++;
+	}
+	swap(arr,j,p);
+	return j;
+}
+
+Stack
+-------
+10.Push,Pop and Display
+------------------------- 
+ 
+
+#include<stdio.h>
+int st[100],size,val,top = -1;
+void push(int val);
+int pop();
+void display();
+int main()
+{
+	int ch;
+	scanf("%d",&size);
+	while(1)
+	{
+		printf("1.Push  2.Pop  3.Display  4.Exit : \n");
+		scanf("%d",&ch);
+		if(ch==1)
+		{
+			scanf("%d",&val);
+			push(val);
+		}
+		else if(ch==2)
+		{
+			val = pop();
+			if(val==-1)
+			printf("Stack is empty or underflow\n");
+			else
+			printf("%d\n",val);	
+		}
+		else if(ch==3)
+		{
+			display();
+		}
+		else
+		{
+			break;
+		}
+	}
+}
+void push(int val)
+{
+    if(top == size-1)
+	{
+		printf("Stack is full or overflow\n");
+	}	
+	else
+	{
+		st[++top] = val;
+	}
+}
+int pop()
+{
+	if(top == -1)
+	{
+		return -1;
+	}
+	else
+	{
+		val = st[top];
+		st[top--] = 0;
+		return val;
+	}
+}
+void display()
+{
+	int i;
+	if(top == -1)
+	{
+		printf("Stack is empty or underflow\n");
+	}
+	else
+	{
+		for(i=top;i>=0;i--)
+		{
+			printf("%d ",st[i]);
+		}
+	}
+}
+
+11.Infix to postfix 
+---------------------
+
+#include<stdio.h>
+#include<string.h>
+int precedence(char ch);
+char *infix_postfix(char *infix);
+int main()
+{
+	char infix[100],*postfix;
+	scanf("%[^\n]s",&infix);
+	postfix = infix_postfix(infix);
+	printf("%s",postfix);
+}
+char *infix_postfix(char *infix)
+{
+	int i, j = 0, top = -1,n;
+	n = strlen(infix);
+	char st[n],op;
+	static char postfix[100];
+	for(i = 0; i < n; i++)
+	{
+		if(precedence(infix[i]))
+		{
+			if(top == -1 || infix[i] == '(' || precedence(infix[i]) > precedence(st[top]))
+			{
+				st[++top] = infix[i];
+			}
+			else if(infix[i] == ')')
+			{
+				op = st[top--];
+				while(op != '(')
+				{
+					postfix[j++] = op;
+					op = st[top--];
+				}
+			}
+			else
+			{
+				while(top != -1 && precedence(infix[i]) <= precedence(st[top]))
+				{
+					op = st[top--];
+					postfix[j++] = op;
+				}
+				st[++top] = infix[i];
+			}
+		}
+		else
+		{
+			postfix[j++] = infix[i];
+		}
+	}
+	for(i=top;i>=0;i--)
+	{
+		postfix[j++] = st[i];
+	}
+	return postfix;
+}
+int precedence(char ch)
+{
+	switch(ch)
+	{
+		case '^' :
+			return 3;
+		case '*' :
+		case '/' :
+			return 2;
+		case '+' :
+		case '-' :
+			return 1;
+		case '(' :
+		case ')' :
+			return -1;
+		default :
+			return 0;
+	}
+}
+
+12.Postfix Evalution 
+---------------------
+
+#include<stdio.h>
+int per_oper(int op1,char ch,int op2);
+int isoper(char ch);
+int post_eval(char *post);
+int main()
+{
+	char postfix[20];
+	scanf("%[^\n]s",&postfix);
+	int res;
+	res = post_eval(postfix);
+	printf("%d",res);
+}
+int per_oper(int op1,char ch,int op2)
+{
+	switch(ch)
+	{
+		case '^' : return op2 ^ op1;
+		case '*' : return op2 * op1;
+		case '/' : return op2 / op1;
+		case '+' : return op2 + op1;
+		case '-' : return op2 - op1;
+	}
+}
+int isoper(char ch)
+{
+	switch(ch)
+	{
+		case '^' :
+		case '*' :
+		case '/' :
+		case '+' :
+		case '-' :
+			return 1;
+		default :
+			return 0;
+	}
+}
+int post_eval(char *post)
+{
+	int i,st[100],top = -1,val = 0,res,op1,op2;
+	for(i=0;post[i]!='0';i++)
+	{
+		if(isoper(post[i]))
+		{
+			op1 = st[top--];
+			op2 = st[top--];
+			res = per_oper(op1,post[i],op2);
+			st[++top] = res;
+		}
+		else 
+		{
+			if(post[i] >= 48 && post[i] <= 57 )
+			{
+				val = val*10 + post[i] - '0';
+			}
+			else if(post[i] == ' ' && val != 0)
+			{
+				st[++top] = val;
+				val = 0;
+			}
+		}
+	}
+	return st[0];
+}
+
+
+14.Queue
+---------
+#include<stdio.h>
+void enque(int val);
+int deque();
+void display();
+int front = -1, rear = -1, size, val, i, res,queue[100];
+int main()
+{
+	int ch;
+	scanf("%d",&size);
+	while(1)
+	{
+		printf("1.Enque  2.Deque  3.Display  4.Exit : ");
+		scanf("%d",&ch);
+		if ( ch == 1 )
+		{
+			scanf("%d",&val);
+			enque(val);
+		}
+		else if ( ch == 2 )
+		{
+			res = deque();
+			if(res == -1)
+			{
+				printf("Queue is empty or underflow\n");
+			}
+			else
+			{
+				printf("%d",res);
+			}
+		}
+		else if (ch == 3)
+		{
+			display();
+		}
+		else
+		{
+			break;
+		}
+	}
+	
+}
+void enque(int val)
+{
+	if(rear == size-1)
+	{
+		printf("Queue is full or overflow\n");
+		return;
+	}
+	else if(rear == -1 && front == -1)
+	{
+		rear = 0;
+		front = 0;
+		queue[rear] = val;
+	}
+	else
+	{
+		queue[++rear] = val;
+	}
+}
+int deque()
+{
+	if(rear == -1 && front == -1)
+	{
+		val = -1;
+	}
+	else if(front == rear)
+	{
+		val = queue[front];
+		front = -1;
+		rear = -1;
+	}
+	else
+	{
+		val = queue[front++];
+	}
+	return val;
+}
+void display()
+{
+	int i;
+	if(rear == -1 && front == -1)
+	{
+		printf("Queue is empty or underflow\n");
+	}
+	else
+	{
+		for(i=front;i<=rear;i++)
+		{
+			printf("%d ",queue[i]);
+		}
+		printf("\n");
+	}
+}
+
+
+15.Circular Queue
+------------------
+
+
+
+

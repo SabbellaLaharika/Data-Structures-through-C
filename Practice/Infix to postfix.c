@@ -1,0 +1,74 @@
+#include<stdio.h>
+#include<string.h>
+int precedence(char ch);
+char *infix_postfix(char *infix);
+int main()
+{
+	char infix[100],*postfix;
+	scanf("%[^\n]s",&infix);
+	postfix = infix_postfix(infix);
+	printf("%s",postfix);
+}
+char *infix_postfix(char *infix)
+{
+	int i, j = 0, top = -1,n;
+	n = strlen(infix);
+	char st[n],op;
+	static char postfix[100];
+	for(i = 0; i < n; i++)
+	{
+		if(precedence(infix[i]))
+		{
+			if(top == -1 || infix[i] == '(' || precedence(infix[i]) > precedence(st[top]))
+			{
+				st[++top] = infix[i];
+			}
+			else if(infix[i] == ')')
+			{
+				op = st[top--];
+				while(op != '(')
+				{
+					postfix[j++] = op;
+					op = st[top--];
+				}
+			}
+			else
+			{
+				while(top != -1 && precedence(infix[i]) <= precedence(st[top]))
+				{
+					op = st[top--];
+					postfix[j++] = op;
+				}
+				st[++top] = infix[i];
+			}
+		}
+		else
+		{
+			postfix[j++] = infix[i];
+		}
+	}
+	for(i=top;i>=0;i--)
+	{
+		postfix[j++] = st[i];
+	}
+	return postfix;
+}
+int precedence(char ch)
+{
+	switch(ch)
+	{
+		case '^' :
+			return 3;
+		case '*' :
+		case '/' :
+			return 2;
+		case '+' :
+		case '-' :
+			return 1;
+		case '(' :
+		case ')' :
+			return -1;
+		default :
+			return 0;
+	}
+}
